@@ -9,6 +9,7 @@ import Details from "./screen/Details"
 import Cart from "./screen/Cart"
 import Payment from "./screen/Payment"
 import Pin from "./screen/Pin"
+import Order from "./screen/Order"
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { StyleSheet, TextInput, TouchableOpacity, View,Text, TouchableHighlight } from "react-native";
@@ -46,9 +47,35 @@ export default function App(){
           options={{ headerShown: false,animation:'slide_from_right'}} 
         />
         <Stack.Screen 
-          name="Details" 
-          component={Details}
-          options={{ headerShown: false,animation:'slide_from_right'}} 
+        name="Details" 
+        component={Details}
+        options={{ headerShown: false,animation:'slide_from_right'}} 
+        />
+        <Stack.Screen 
+          name="Order" 
+          component={Order}
+          options={({navigation})=>({
+            headerTitle:()=>(
+              <View>
+                <Text style={{textAlign:'center', fontSize:25,fontWeight:600}}>My Order</Text>
+              </View>
+            ),headerLeft:()=>(
+              <TouchableHighlight
+                  style={{
+                    backgroundColor: '#FFB547',
+                    padding: 5,
+                    borderTopEndRadius: 15,
+                    borderBottomLeftRadius: 15,
+                  }}
+                  onPress={() => navigation.navigate('Pin')}
+                  underlayColor="#e0a63a"
+                >
+                  <FontAwesomeIcon icon={faAngleLeft} size={30} color="#000" />
+                </TouchableHighlight>
+            ),
+            headerShown: true,
+            animation:'fade_from_bottom'
+          })} 
         />
         <Stack.Screen 
           name="Pin" 
@@ -68,7 +95,7 @@ export default function App(){
                     borderTopEndRadius: 15,
                     borderBottomLeftRadius: 15,
                   }}
-                  onPress={() => navigation.navigate('Home')}
+                  onPress={() => navigation.navigate('Payment')}
                   underlayColor="#e0a63a"
                 >
                   <FontAwesomeIcon icon={faAngleLeft} size={30} color="#000" />
